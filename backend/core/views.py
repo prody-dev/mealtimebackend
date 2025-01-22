@@ -4,12 +4,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Rol, User, Categoria, Descuento, Precio 
-from .models import Lugar, Estado, Vendedor, Comprador, Producto, Orden, ProductoOrden
+from .models import Lugar, Estado, Vendedor, Comprador, Producto, Orden, OrdenProducto
 from .models import ImagenProducto, Calificacion, CalificacionProducto, CalificacionVendedor
 from .serializers import RolSerializer, UserSerializer, CategoriaSerializer
 from .serializers import DescuentoSerializer, PrecioSerializer, LugarSerializer, EstadoSerializer
 from .serializers import VendedorSerializer, CompradorSerializer, ProductoSerializer, OrdenSerializer
-from .serializers import ProductoOrdenSerializer, ImagenProductoSerializer, CalificacionSerializer
+from .serializers import OrdenProductoSerializer, ImagenProductoSerializer, CalificacionSerializer
 from .serializers import CalificacionProductoSerializer, CalificacionVendedorSerializer
 
 class CustomAuthToken(ObtainAuthToken):
@@ -89,9 +89,9 @@ class OrdenViewSet(viewsets.ModelViewSet):
     queryset = Orden.objects.all()
     serializer_class = OrdenSerializer
 
-class ProductoOrdenViewSet(viewsets.ModelViewSet):
-    queryset = ProductoOrden.objects.all()
-    serializer_class = ProductoOrdenSerializer
+class OrdenProductoViewSet(viewsets.ModelViewSet):
+    queryset = OrdenProducto.objects.all()
+    serializer_class = OrdenProductoSerializer
 
 class ImagenProductoViewSet(viewsets.ModelViewSet):
     queryset = ImagenProducto.objects.all()

@@ -61,8 +61,9 @@ from django.db import models
 class Producto(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=200)
+    stock = models.PositiveIntegerField()
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    descuento = models.ForeignKey(Descuento, on_delete=models.CASCADE)
+    descuento = models.ForeignKey(Descuento, on_delete=models.CASCADE, blank=True, null=True)
     precio = models.ForeignKey(Precio, on_delete=models.CASCADE)
     vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE)
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
@@ -79,23 +80,21 @@ class ImagenProducto(models.Model):
         return f"Imagen de {self.producto.nombre}"
 
 class Orden(models.Model):
+    fecha_orden = models.DateField()
     comprador = models.ForeignKey(Comprador, on_delete=models.CASCADE)
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
-    fecha_orden = models.DateField()
-
-
+    Productos = models.ManyToManyField(Producto, through='OrdenProducto')
+    
     def __str__(self):
         return f"Orden {self.id} - {self.comprador}"
-
-class ProductoOrden(models.Model):
-    producto = models.ManyToManyField(Producto)
-    orden = models.ManyToManyField(Orden)
-    stock = models.PositiveIntegerField()
+    
+class OrdenProducto(models.Model):
+    orden = models.ForeignKey(Orden, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField()
-    total = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"{self.producto.nombre} en orden {self.orden.id} con stock {self.stock}"
+        return f"{self.orden} - {self.producto}"
 
 
 class Calificacion(models.Model):

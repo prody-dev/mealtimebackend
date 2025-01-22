@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import Rol, User, Categoria, Descuento, Precio 
-from .models import Lugar, Estado, Vendedor, Comprador, Producto, Orden, ProductoOrden
+from .models import Lugar, Estado, Vendedor, Comprador, Producto, Orden, OrdenProducto
 from .models import ImagenProducto, Calificacion, CalificacionProducto, CalificacionVendedor
 
 class UserSerializer(serializers.ModelSerializer):
@@ -64,9 +64,9 @@ class OrdenSerializer(serializers.ModelSerializer):
         model = Orden
         fields = "__all__"
 
-class ProductoOrdenSerializer(serializers.ModelSerializer):
+class OrdenProductoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ProductoOrden
+        model = OrdenProducto
         fields = "__all__"
 
 class ImagenProductoSerializer(serializers.ModelSerializer):

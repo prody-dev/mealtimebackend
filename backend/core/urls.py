@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import RolViewSet, UserViewSet, CustomAuthToken, LogoutView, CategoriaViewSet
 from .views import DescuentoViewSet, PrecioViewSet, LugarViewSet, EstadoViewSet, VendedorViewSet, CompradorViewSet
-from .views import ProductoViewSet, OrdenViewSet, ProductoOrdenViewSet, ImagenProductoViewSet, CalificacionViewSet
+from .views import ProductoViewSet, OrdenViewSet, OrdenProductoViewSet, ImagenProductoViewSet, CalificacionViewSet
 from .views import CalificacionProductoViewSet, CalificacionVendedorViewSet
 
 router = DefaultRouter()
@@ -17,7 +17,7 @@ router.register(r'vendedor', VendedorViewSet)
 router.register(r'comprador', CompradorViewSet)
 router.register(r'producto', ProductoViewSet)
 router.register(r'orden', OrdenViewSet)
-router.register(r'producto-orden', ProductoOrdenViewSet)
+router.register(r'orden-producto', OrdenProductoViewSet)
 router.register(r'imagen-producto', ImagenProductoViewSet)
 router.register(r'calificacion', CalificacionViewSet)
 router.register(r'calificacion-producto', CalificacionProductoViewSet)
